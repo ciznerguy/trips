@@ -1,0 +1,708 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ליסבון ב-4 ימים - מסלול טיול אינטראקטיבי</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,600;1,600&display=swap" rel="stylesheet">
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Heebo', 'sans-serif'],
+            serif: ['Playfair Display', 'serif'],
+          },
+          colors: {
+            lisbon: {
+              yellow: '#F59E0B',
+              tile: '#0284C7',
+              terracotta: '#E2583E',
+              sand: '#FBF9F5',
+              dark: '#1E293B',
+            }
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    body {
+      background-color: #F8FAFC;
+      font-family: 'Heebo', sans-serif;
+    }
+    .tile-pattern {
+      background-color: #0369a1;
+      background-image: radial-gradient(rgba(255, 255, 255, 0.15) 1px, transparent 0);
+      background-size: 14px 14px;
+    }
+    .hide-scrollbar::-webkit-scrollbar {
+      display: none;
+    }
+    .hide-scrollbar {
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+    }
+    .card-transition {
+      transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+  </style>
+</head>
+<body class="text-slate-800 antialiased min-h-screen flex flex-col selection:bg-amber-100 selection:text-amber-900">
+
+  <header class="relative text-white shadow-lg overflow-hidden tile-pattern border-b-4 border-amber-500">
+    <div class="absolute inset-0 bg-gradient-to-r from-sky-900/90 via-sky-800/80 to-amber-700/80 backdrop-blur-[2px]"></div>
+    
+    <div class="relative max-w-6xl mx-auto px-4 pt-8 pb-10 sm:pt-12 sm:pb-14">
+      <div class="flex flex-wrap items-center justify-between gap-4 mb-4">
+        <div class="inline-flex items-center gap-2 bg-white/15 backdrop-blur-md px-3 py-1 rounded-full text-xs sm:text-sm font-medium border border-white/20">
+          <span>🇵🇹</span>
+          <span>פורטוגל | מדריך מסלול מותאם</span>
+        </div>
+        <div class="flex items-center gap-3">
+          <button onclick="toggleAllVisited()" id="resetBtn" class="text-xs bg-white/10 hover:bg-white/20 border border-white/30 px-3 py-1.5 rounded-lg transition">
+            איפוס סימוני ביקור
+          </button>
+          <button onclick="window.print()" class="text-xs bg-amber-500 hover:bg-amber-600 text-slate-900 font-semibold px-3 py-1.5 rounded-lg shadow transition flex items-center gap-1.5">
+            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z"/></svg>
+            הדפסה
+          </button>
+        </div>
+      </div>
+
+      <h1 class="text-3xl sm:text-5xl font-extrabold tracking-tight mb-3">
+        4 ימים קסומים בליסבון
+      </h1>
+      <p class="text-sky-100 max-w-2xl text-sm sm:text-base font-light leading-relaxed">
+        מדריך מסלול מקיף ומסודר גאוגרפית: מרובעי הסמטאות העתיקים, מנזרי בלם המלכותיים, ארמונות האגדה בסינטרה ועד לשווקי האוכל והשקיעות על נהר הטז'ו.
+      </p>
+
+      <!-- Key Stats Bar -->
+      <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 mt-6 pt-6 border-t border-white/15">
+        <div class="bg-black/20 backdrop-blur-sm p-3 rounded-xl border border-white/10">
+          <div class="text-xs text-sky-200">משך הטיול</div>
+          <div class="text-lg font-bold">4 ימים מלאים</div>
+        </div>
+        <div class="bg-black/20 backdrop-blur-sm p-3 rounded-xl border border-white/10">
+          <div class="text-xs text-sky-200">טיול מחוץ לעיר</div>
+          <div class="text-lg font-bold">סינטרה וקשקאיש</div>
+        </div>
+        <div class="bg-black/20 backdrop-blur-sm p-3 rounded-xl border border-white/10">
+          <div class="text-xs text-sky-200">התניידות עיקרית</div>
+          <div class="text-lg font-bold">מטרו, חשמליות, Bolt</div>
+        </div>
+        <div class="bg-black/20 backdrop-blur-sm p-3 rounded-xl border border-white/10">
+          <div class="text-xs text-sky-200">קצב מומלץ</div>
+          <div class="text-lg font-bold">מאוזן וממוקד אזורים</div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main class="max-w-6xl mx-auto px-4 py-8 flex-1 w-full">
+    <!-- Day Navigation Buttons -->
+    <div class="flex items-center gap-2 overflow-x-auto pb-3 mb-6 hide-scrollbar border-b border-slate-200">
+      <button onclick="switchTab('day1')" id="tab-day1" class="day-tab active-tab px-4 py-2.5 rounded-xl font-bold text-sm whitespace-nowrap transition flex items-center gap-2 shadow-sm bg-sky-600 text-white">
+        <span>📍 יום 1:</span>
+        <span>באישה, שיאדו ואלפמה</span>
+      </button>
+      <button onclick="switchTab('day2')" id="tab-day2" class="day-tab px-4 py-2.5 rounded-xl font-medium text-sm whitespace-nowrap transition flex items-center gap-2 bg-white text-slate-700 hover:bg-slate-100 border border-slate-200">
+        <span>⛵ יום 2:</span>
+        <span>רובע בלם ו-LX Factory</span>
+      </button>
+      <button onclick="switchTab('day3')" id="tab-day3" class="day-tab px-4 py-2.5 rounded-xl font-medium text-sm whitespace-nowrap transition flex items-center gap-2 bg-white text-slate-700 hover:bg-slate-100 border border-slate-200">
+        <span>🏰 יום 3:</span>
+        <span>ארמונות סינטרה והחוף</span>
+      </button>
+      <button onclick="switchTab('day4')" id="tab-day4" class="day-tab px-4 py-2.5 rounded-xl font-medium text-sm whitespace-nowrap transition flex items-center gap-2 bg-white text-slate-700 hover:bg-slate-100 border border-slate-200">
+        <span>🍷 יום 4:</span>
+        <span>בוהו, שווקים ושקיעה</span>
+      </button>
+      <button onclick="switchTab('tips')" id="tab-tips" class="day-tab px-4 py-2.5 rounded-xl font-medium text-sm whitespace-nowrap transition flex items-center gap-2 bg-amber-50 text-amber-800 hover:bg-amber-100 border border-amber-300">
+        <span>💡 טיפים חיוניים</span>
+      </button>
+    </div>
+
+    <!-- Category Filter & Search Tool -->
+    <div class="bg-white rounded-2xl p-4 shadow-sm border border-slate-200/80 mb-8 flex flex-col md:flex-row items-center justify-between gap-4">
+      <div class="flex items-center gap-2 w-full md:w-auto overflow-x-auto hide-scrollbar text-xs">
+        <span class="text-slate-400 font-medium pl-1">סינון:</span>
+        <button onclick="filterCategory('all')" class="cat-pill active-pill px-3 py-1.5 rounded-full bg-slate-900 text-white font-medium">הכל</button>
+        <button onclick="filterCategory('viewpoint')" class="cat-pill px-3 py-1.5 rounded-full bg-slate-100 text-slate-600 hover:bg-slate-200 font-medium">🌅 תצפיות</button>
+        <button onclick="filterCategory('culture')" class="cat-pill px-3 py-1.5 rounded-full bg-slate-100 text-slate-600 hover:bg-slate-200 font-medium">🏛️ היסטוריה ואמנות</button>
+        <button onclick="filterCategory('food')" class="cat-pill px-3 py-1.5 rounded-full bg-slate-100 text-slate-600 hover:bg-slate-200 font-medium">🥐 קולינריה ובילוי</button>
+      </div>
+
+      <div class="relative w-full md:w-72">
+        <input type="text" id="searchInput" oninput="handleSearch()" placeholder="חיפוש אתר או רובע..." class="w-full text-xs sm:text-sm pl-8 pr-9 py-2 bg-slate-50 border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-sky-500 focus:bg-white transition">
+        <svg class="w-4 h-4 text-slate-400 absolute right-3 top-2.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
+      </div>
+    </div>
+
+    <section id="content-day1" class="day-section space-y-6">
+      <!-- Section Intro Banner -->
+      <div class="bg-gradient-to-r from-amber-50 via-orange-50 to-amber-50/40 p-5 rounded-2xl border border-amber-200/80">
+        <div class="flex items-start justify-between gap-4">
+          <div>
+            <span class="inline-block px-2.5 py-0.5 bg-amber-200 text-amber-900 text-xs font-bold rounded-md mb-2">יום 1 • הלב הפועם והסמטאות העתיקות</span>
+            <h2 class="text-2xl font-bold text-slate-800">באישה, שיאדו ורובע אלפמה</h2>
+            <p class="text-slate-600 text-sm mt-1">מפגש ראשון עם הכיכרות המרשימות, ריצוף הגלים השחור-לבן, תצפיות מרהיבות וערב פאדו נוסטלגי.</p>
+          </div>
+          <span class="text-3xl hidden sm:block">🚋</span>
+        </div>
+      </div>
+
+      <!-- Time blocks grid -->
+      <div class="grid grid-cols-1 gap-4">
+        <!-- Morning Item 1 -->
+        <article data-cat="culture" class="activity-card bg-white rounded-2xl p-5 border border-slate-200 shadow-sm hover:shadow-md card-transition flex flex-col md:flex-row gap-4">
+          <div class="md:w-36 flex-shrink-0 flex md:flex-col items-center md:items-start justify-between">
+            <span class="text-xs font-bold text-sky-700 bg-sky-50 px-2.5 py-1 rounded-lg">בוקר | 09:30</span>
+            <label class="inline-flex items-center gap-1.5 cursor-pointer text-xs text-slate-500 mt-1">
+              <input type="checkbox" onchange="toggleVisited(this, 'd1-rossio')" class="item-checkbox rounded text-sky-600 w-4 h-4">
+              <span>ביקרתי כאן</span>
+            </label>
+          </div>
+          <div class="flex-1">
+            <div class="flex items-center gap-2 mb-1">
+              <h3 class="text-lg font-bold text-slate-800">כיכר רוסיו (Praça do Rossio) ורחוב אוגוסטה</h3>
+              <span class="text-xs bg-slate-100 text-slate-600 px-2 py-0.5 rounded-full">🏛️ היסטוריה</span>
+            </div>
+            <p class="text-slate-600 text-sm leading-relaxed mb-3">
+              התחילו את הבוקר בכיכר המרכזית עם ריצוף הגלים המפורסם (Calçada Portuguesa) והמזרקות הצרפתיות. משם צעדו במדרחוב שוקק החיים **Rua Augusta** המוביל עד שער הניצחון המונומנטלי.
+            </p>
+            <div class="text-xs bg-slate-50 text-slate-500 p-2.5 rounded-xl border border-slate-150 flex items-center gap-2">
+              <span class="text-base">💡</span>
+              <span><strong>טיפ קטן:</strong> עצרו לטעום ג'ינג'יניה (Ginjinha) – ליקר הדובדבנים המסורתי בכוסית שוקולד בדוכנים הסמוכים לכיכר.</span>
+            </div>
+          </div>
+        </article>
+
+        <!-- Morning Item 2 -->
+        <article data-cat="culture viewpoint" class="activity-card bg-white rounded-2xl p-5 border border-slate-200 shadow-sm hover:shadow-md card-transition flex flex-col md:flex-row gap-4">
+          <div class="md:w-36 flex-shrink-0 flex md:flex-col items-center md:items-start justify-between">
+            <span class="text-xs font-bold text-sky-700 bg-sky-50 px-2.5 py-1 rounded-lg">בוקר | 11:00</span>
+            <label class="inline-flex items-center gap-1.5 cursor-pointer text-xs text-slate-500 mt-1">
+              <input type="checkbox" onchange="toggleVisited(this, 'd1-comercio')" class="item-checkbox rounded text-sky-600 w-4 h-4">
+              <span>ביקרתי כאן</span>
+            </label>
+          </div>
+          <div class="flex-1">
+            <div class="flex items-center gap-2 mb-1">
+              <h3 class="text-lg font-bold text-slate-800">כיכר המסחר (Praça do Comércio) ומעלית סנטה ז'ושטה</h3>
+              <span class="text-xs bg-slate-100 text-slate-600 px-2 py-0.5 rounded-full">🌅 תצפית ואדריכלות</span>
+            </div>
+            <p class="text-slate-600 text-sm leading-relaxed mb-3">
+              אחת הכיכרות הגדולות והמרשימות באירופה, הפתוחה היישר אל נהר הטז'ו. המשיכו אל מעלית הברזל הניאו-גותית **Elevador de Santa Justa** המחברת בין העיר התחתית לשיאדו.
+            </p>
+            <div class="text-xs bg-amber-50 text-amber-800 p-2.5 rounded-xl border border-amber-200 flex items-center gap-2">
+              <span class="text-base">⚠️</span>
+              <span><strong>קיצור דרך חכם:</strong> אם יש תור ארוך במעלית, אל תמתינו! ניתן להגיע לנקודת התצפית בחינם דרך מדרגות שיאדו הסמוכות למנזר קארמו.</span>
+            </div>
+          </div>
+        </article>
+
+        <!-- Midday Item 3 -->
+        <article data-cat="food culture" class="activity-card bg-white rounded-2xl p-5 border border-slate-200 shadow-sm hover:shadow-md card-transition flex flex-col md:flex-row gap-4">
+          <div class="md:w-36 flex-shrink-0 flex md:flex-col items-center md:items-start justify-between">
+            <span class="text-xs font-bold text-amber-700 bg-amber-50 px-2.5 py-1 rounded-lg">צהריים | 13:00</span>
+            <label class="inline-flex items-center gap-1.5 cursor-pointer text-xs text-slate-500 mt-1">
+              <input type="checkbox" onchange="toggleVisited(this, 'd1-chiado')" class="item-checkbox rounded text-sky-600 w-4 h-4">
+              <span>ביקרתי כאן</span>
+            </label>
+          </div>
+          <div class="flex-1">
+            <div class="flex items-center gap-2 mb-1">
+              <h3 class="text-lg font-bold text-slate-800">שיק ואלגנטיות ברובע שיאדו (Chiado) ומנזר קארמו</h3>
+              <span class="text-xs bg-amber-100 text-amber-800 px-2 py-0.5 rounded-full">☕ קפה ותרבות</span>
+            </div>
+            <p class="text-slate-600 text-sm leading-relaxed mb-3">
+              בקרו בבית הקפה ההיסטורי <strong>A Brasileira</strong> (והצטלמו עם פסל הברונזה של המשורר פרננדו פסואה), הכנסו ל-<strong>Livraria Bertrand</strong> (חנות הספרים הפעילה העתיקה בעולם מ-1732), וסיירו בשרידי <strong>Convento do Carmo</strong> – כנסייה גותית חסרת גג שהופכת למוזיאון פתוח לשמיים.
+            </p>
+          </div>
+        </article>
+
+        <!-- Afternoon & Evening Item 4 -->
+        <article data-cat="viewpoint food" class="activity-card bg-white rounded-2xl p-5 border border-slate-200 shadow-sm hover:shadow-md card-transition flex flex-col md:flex-row gap-4">
+          <div class="md:w-36 flex-shrink-0 flex md:flex-col items-center md:items-start justify-between">
+            <span class="text-xs font-bold text-purple-700 bg-purple-50 px-2.5 py-1 rounded-lg">ערב | 16:30 ואילך</span>
+            <label class="inline-flex items-center gap-1.5 cursor-pointer text-xs text-slate-500 mt-1">
+              <input type="checkbox" onchange="toggleVisited(this, 'd1-alfama')" class="item-checkbox rounded text-sky-600 w-4 h-4">
+              <span>ביקרתי כאן</span>
+            </label>
+          </div>
+          <div class="flex-1">
+            <div class="flex items-center gap-2 mb-1">
+              <h3 class="text-lg font-bold text-slate-800">סמטאות אלפמה (Alfama), טירת סאו ז'ורז'ה ומוזיקת פאדו</h3>
+              <span class="text-xs bg-purple-100 text-purple-800 px-2 py-0.5 rounded-full">🎶 פאדו ושקיעה</span>
+            </div>
+            <p class="text-slate-600 text-sm leading-relaxed mb-3">
+              טפסו לתצפיות הציוריות <strong>סנטה לוזיה (Santa Luzia)</strong> ו-<strong>פורטס דו סול</strong> המעוטרות באריחי אזולז'וס כחולים. בקרו בטירה המורית <strong>Castelo de São Jorge</strong> לתצפית על הגגות האדומים. בערב, לכו לאיבוד בסמטאות ואכלו בטברנה מקומית בליווי שירת פאדו חיה.
+            </p>
+            <div class="text-xs bg-slate-50 text-slate-600 p-2.5 rounded-xl border border-slate-200">
+              📌 <strong>מומלץ:</strong> הזמינו מקום מראש במסעדת פאדו (Fado Tasca) באלפמה, כדי להבטיח שולחן אותנטי ללא מלכודות תיירים.
+            </div>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section id="content-day2" class="day-section hidden space-y-6">
+      <div class="bg-gradient-to-r from-sky-50 via-blue-50 to-sky-50/40 p-5 rounded-2xl border border-sky-200/80">
+        <div class="flex items-start justify-between gap-4">
+          <div>
+            <span class="inline-block px-2.5 py-0.5 bg-sky-200 text-sky-900 text-xs font-bold rounded-md mb-2">יום 2 • עידן התגליות והמתחם האורבני</span>
+            <h2 class="text-2xl font-bold text-slate-800">רובע בלם (Belém) ומתחם ה-LX Factory</h2>
+            <p class="text-slate-600 text-sm mt-1">נסיעה מערבה לאורך קו המים: המאפה המקורי מ-1837, מנזרי ענק ורובע יצירתי תחת גשר ה-25 באפריל.</p>
+          </div>
+          <span class="text-3xl hidden sm:block">🥧</span>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 gap-4">
+        <!-- Morning Item 1 -->
+        <article data-cat="food" class="activity-card bg-white rounded-2xl p-5 border border-slate-200 shadow-sm hover:shadow-md card-transition flex flex-col md:flex-row gap-4">
+          <div class="md:w-36 flex-shrink-0 flex md:flex-col items-center md:items-start justify-between">
+            <span class="text-xs font-bold text-sky-700 bg-sky-50 px-2.5 py-1 rounded-lg">בוקר | 09:15</span>
+            <label class="inline-flex items-center gap-1.5 cursor-pointer text-xs text-slate-500 mt-1">
+              <input type="checkbox" onchange="toggleVisited(this, 'd2-belem-pastry')" class="item-checkbox rounded text-sky-600 w-4 h-4">
+              <span>ביקרתי כאן</span>
+            </label>
+          </div>
+          <div class="flex-1">
+            <div class="flex items-center gap-2 mb-1">
+              <h3 class="text-lg font-bold text-slate-800">מאפיית Pastéis de Belém המקורית</h3>
+              <span class="text-xs bg-amber-100 text-amber-800 px-2 py-0.5 rounded-full">🥐 מוסד קולינרי</span>
+            </div>
+            <p class="text-slate-600 text-sm leading-relaxed mb-3">
+              פתחו את היום במאפייה האגדית הפועלת ברציפות מאז 1837. הזמינו את ה-Pastel חם ישר מהתנור, ופזרו עליו אבקת סוכר וקינמון לפי המסורת.
+            </p>
+            <div class="text-xs bg-slate-50 text-slate-500 p-2.5 rounded-xl border border-slate-200">
+              💡 התור ברחוב הוא למאפים לקחת. אם תשבו באחד האולמות הפנימיים המרשימים, השירות מהיר בהרבה!
+            </div>
+          </div>
+        </article>
+
+        <!-- Morning Item 2 -->
+        <article data-cat="culture" class="activity-card bg-white rounded-2xl p-5 border border-slate-200 shadow-sm hover:shadow-md card-transition flex flex-col md:flex-row gap-4">
+          <div class="md:w-36 flex-shrink-0 flex md:flex-col items-center md:items-start justify-between">
+            <span class="text-xs font-bold text-sky-700 bg-sky-50 px-2.5 py-1 rounded-lg">בוקר | 10:30</span>
+            <label class="inline-flex items-center gap-1.5 cursor-pointer text-xs text-slate-500 mt-1">
+              <input type="checkbox" onchange="toggleVisited(this, 'd2-jeronimos')" class="item-checkbox rounded text-sky-600 w-4 h-4">
+              <span>ביקרתי כאן</span>
+            </label>
+          </div>
+          <div class="flex-1">
+            <div class="flex items-center gap-2 mb-1">
+              <h3 class="text-lg font-bold text-slate-800">מנזר ז'רונימוש ואנדרטת התגליות</h3>
+              <span class="text-xs bg-slate-100 text-slate-600 px-2 py-0.5 rounded-full">🏛️ אתר מורשת עולמי</span>
+            </div>
+            <p class="text-slate-600 text-sm leading-relaxed mb-3">
+              מנזר <strong>Mosteiro dos Jerónimos</strong> הוא מופת אדריכלות מנואלינית מפוארת ומקום קבורתו של מגלה הארצות ואסקו דה גאמה. משם חצו את הגנים אל <strong>אנדרטת התגליות (Padrão dos Descobrimentos)</strong> על שפת הנהר.
+            </p>
+            <div class="text-xs bg-rose-50 text-rose-800 p-2.5 rounded-xl border border-rose-200">
+              🎟️ <strong>חובה:</strong> כרטיסים למנזר ז'רונימוש יש להזמין אונליין מראש עם שעה נקובה, התור במקום עלול לקחת שעות.
+            </div>
+          </div>
+        </article>
+
+        <!-- Afternoon Item 3 -->
+        <article data-cat="culture viewpoint" class="activity-card bg-white rounded-2xl p-5 border border-slate-200 shadow-sm hover:shadow-md card-transition flex flex-col md:flex-row gap-4">
+          <div class="md:w-36 flex-shrink-0 flex md:flex-col items-center md:items-start justify-between">
+            <span class="text-xs font-bold text-sky-700 bg-sky-50 px-2.5 py-1 rounded-lg">צהריים | 13:30</span>
+            <label class="inline-flex items-center gap-1.5 cursor-pointer text-xs text-slate-500 mt-1">
+              <input type="checkbox" onchange="toggleVisited(this, 'd2-torre-maat')" class="item-checkbox rounded text-sky-600 w-4 h-4">
+              <span>ביקרתי כאן</span>
+            </label>
+          </div>
+          <div class="flex-1">
+            <div class="flex items-center gap-2 mb-1">
+              <h3 class="text-lg font-bold text-slate-800">מגדל בלם (Torre de Belém) וטיילת MAAT</h3>
+              <span class="text-xs bg-sky-100 text-sky-800 px-2 py-0.5 rounded-full">🌊 קו המים</span>
+            </div>
+            <p class="text-slate-600 text-sm leading-relaxed mb-3">
+              המגדל המבוצר היושב במי הנהר הוא סמלה הנודע של פורטוגל. לאחר תמונות ליד המגדל, צעדו מזרחה לאורך הטיילת הרגועה אל <strong>מוזיאון MAAT</strong> ועלו על הגג הגלי המעוצב לתצפית מרשימה על גשר ה-25 באפריל.
+            </p>
+          </div>
+        </article>
+
+        <!-- Evening Item 4 -->
+        <article data-cat="food culture" class="activity-card bg-white rounded-2xl p-5 border border-slate-200 shadow-sm hover:shadow-md card-transition flex flex-col md:flex-row gap-4">
+          <div class="md:w-36 flex-shrink-0 flex md:flex-col items-center md:items-start justify-between">
+            <span class="text-xs font-bold text-purple-700 bg-purple-50 px-2.5 py-1 rounded-lg">ערב | 16:30 ואילך</span>
+            <label class="inline-flex items-center gap-1.5 cursor-pointer text-xs text-slate-500 mt-1">
+              <input type="checkbox" onchange="toggleVisited(this, 'd2-lxfactory')" class="item-checkbox rounded text-sky-600 w-4 h-4">
+              <span>ביקרתי כאן</span>
+            </label>
+          </div>
+          <div class="flex-1">
+            <div class="flex items-center gap-2 mb-1">
+              <h3 class="text-lg font-bold text-slate-800">מתחם LX Factory: אמנות, ספרים וקוקטיילים</h3>
+              <span class="text-xs bg-purple-100 text-purple-800 px-2 py-0.5 rounded-full">🎨 מתחם היפסטרי</span>
+            </div>
+            <p class="text-slate-600 text-sm leading-relaxed mb-3">
+              מפעל טקסטיל נטוש שהפך ללב הפועם של היצירה בליסבון. בקרו בחנות הספרים עוצרת הנשימה <strong>Ler Devagar</strong> עם מכונות הדפוס ההיסטוריות, סיירו בין חנויות מעצבים, ושבו לדרינק וארוחת ערב על גג תוסס.
+            </p>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section id="content-day3" class="day-section hidden space-y-6">
+      <div class="bg-gradient-to-r from-emerald-50 via-teal-50 to-emerald-50/40 p-5 rounded-2xl border border-emerald-200/80">
+        <div class="flex items-start justify-between gap-4">
+          <div>
+            <span class="inline-block px-2.5 py-0.5 bg-emerald-200 text-emerald-900 text-xs font-bold rounded-md mb-2">יום 3 • טיול יום מחוץ לעיר</span>
+            <h2 class="text-2xl font-bold text-slate-800">ארמונות סינטרה ועיירת הנופש קשקאיש</h2>
+            <p class="text-slate-600 text-sm mt-1">יערות ערפיליים, ארמונות מהאגדות, באר סודית ונסיעה חזרה לאורך חופי האוקיינוס האטלנטי.</p>
+          </div>
+          <span class="text-3xl hidden sm:block">🏰</span>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 gap-4">
+        <!-- Morning Item 1 -->
+        <article data-cat="culture viewpoint" class="activity-card bg-white rounded-2xl p-5 border border-slate-200 shadow-sm hover:shadow-md card-transition flex flex-col md:flex-row gap-4">
+          <div class="md:w-36 flex-shrink-0 flex md:flex-col items-center md:items-start justify-between">
+            <span class="text-xs font-bold text-emerald-700 bg-emerald-50 px-2.5 py-1 rounded-lg">בוקר | 08:30</span>
+            <label class="inline-flex items-center gap-1.5 cursor-pointer text-xs text-slate-500 mt-1">
+              <input type="checkbox" onchange="toggleVisited(this, 'd3-pena')" class="item-checkbox rounded text-sky-600 w-4 h-4">
+              <span>ביקרתי כאן</span>
+            </label>
+          </div>
+          <div class="flex-1">
+            <div class="flex items-center gap-2 mb-1">
+              <h3 class="text-lg font-bold text-slate-800">רכבת לסינטרה וארמון פנה (Palácio da Pena)</h3>
+              <span class="text-xs bg-emerald-100 text-emerald-800 px-2 py-0.5 rounded-full">🏰 ארמון רומנטי</span>
+            </div>
+            <p class="text-slate-600 text-sm leading-relaxed mb-3">
+              עלו על רכבת נוחה מתחנת Rossio בליסבון (כ-40 דק'). בסינטרה עלו לראש ההר אל ארמון פנה – ארמון צבעוני מרהיב בצהוב ואדום המשלב סגנונות בנייה מגוונים מעל יערות עבותים.
+            </p>
+            <div class="text-xs bg-rose-50 text-rose-800 p-2.5 rounded-xl border border-rose-200">
+              ⏰ <strong>הקפידו על הזמן:</strong> הכרטיס כולל שעת כניסה ספציפית לפנים הארמון. יש לקחת בחשבון את העלייה מתחנת הרכבת לארמון (באוטובוס 434 או מונית/אובר).
+            </div>
+          </div>
+        </article>
+
+        <!-- Midday Item 2 -->
+        <article data-cat="culture" class="activity-card bg-white rounded-2xl p-5 border border-slate-200 shadow-sm hover:shadow-md card-transition flex flex-col md:flex-row gap-4">
+          <div class="md:w-36 flex-shrink-0 flex md:flex-col items-center md:items-start justify-between">
+            <span class="text-xs font-bold text-emerald-700 bg-emerald-50 px-2.5 py-1 rounded-lg">צהריים | 12:30</span>
+            <label class="inline-flex items-center gap-1.5 cursor-pointer text-xs text-slate-500 mt-1">
+              <input type="checkbox" onchange="toggleVisited(this, 'd3-regaleira')" class="item-checkbox rounded text-sky-600 w-4 h-4">
+              <span>ביקרתי כאן</span>
+            </label>
+          </div>
+          <div class="flex-1">
+            <div class="flex items-center gap-2 mb-1">
+              <h3 class="text-lg font-bold text-slate-800">קינטה דה רגאליירה (Quinta da Regaleira) והעיירה</h3>
+              <span class="text-xs bg-slate-100 text-slate-600 px-2 py-0.5 rounded-full">✨ מיסטיקה וגנים</span>
+            </div>
+            <p class="text-slate-600 text-sm leading-relaxed mb-3">
+              אחוזה מיסטית מהפנטת הכוללת מנהרות תת-קרקעיות וגולת הכותרת: <strong>"באר החניכה" (Poço Iniciático)</strong> – גרם מדרגות ספירלי היורד אל מעמקי האדמה. לאחר מכן, טיילו במרכז העיירה וטעמו את מאפה ה-<strong>Travesseiro</strong> המפורסם בקונדיטוריית Piriquita.
+            </p>
+          </div>
+        </article>
+
+        <!-- Afternoon Item 3 -->
+        <article data-cat="viewpoint" class="activity-card bg-white rounded-2xl p-5 border border-slate-200 shadow-sm hover:shadow-md card-transition flex flex-col md:flex-row gap-4">
+          <div class="md:w-36 flex-shrink-0 flex md:flex-col items-center md:items-start justify-between">
+            <span class="text-xs font-bold text-sky-700 bg-sky-50 px-2.5 py-1 rounded-lg">אחה"צ | 15:30</span>
+            <label class="inline-flex items-center gap-1.5 cursor-pointer text-xs text-slate-500 mt-1">
+              <input type="checkbox" onchange="toggleVisited(this, 'd3-cascais')" class="item-checkbox rounded text-sky-600 w-4 h-4">
+              <span>ביקרתי כאן</span>
+            </label>
+          </div>
+          <div class="flex-1">
+            <div class="flex items-center gap-2 mb-1">
+              <h3 class="text-lg font-bold text-slate-800">קאבו דה רוקה (Cabo da Roca) וקשקאיש (Cascais)</h3>
+              <span class="text-xs bg-sky-100 text-sky-800 px-2 py-0.5 rounded-full">🌊 אוקיינוס ונופש</span>
+            </div>
+            <p class="text-slate-600 text-sm leading-relaxed mb-3">
+              קחו אובר או אוטובוס אל <strong>קאבו דה רוקה</strong> – הנקודה המערבית ביותר ביבשת אירופה עם צוקים דרמטיים הנשברים לגלים, או סעו ישירות לעיירת הריביירה היוקרתית <strong>קשקאיש</strong> לשיטוט בסמטאות, גלידה איכותית וטיול מול המרינה.
+            </p>
+            <div class="text-xs bg-slate-50 text-slate-600 p-2.5 rounded-xl border border-slate-200">
+              🚆 <strong>חזרה קלה:</strong> מקשקאיש יש רכבת תכופה ומהירה הנוסעת לאורך קו החוף ומגיעה ישירות לתחנת Cais do Sodré בליסבון.
+            </div>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section id="content-day4" class="day-section hidden space-y-6">
+      <div class="bg-gradient-to-r from-rose-50 via-pink-50 to-rose-50/40 p-5 rounded-2xl border border-rose-200/80">
+        <div class="flex items-start justify-between gap-4">
+          <div>
+            <span class="inline-block px-2.5 py-0.5 bg-rose-200 text-rose-900 text-xs font-bold rounded-md mb-2">יום 4 • שיק בוהמייני, שווקים ושקיעה</span>
+            <h2 class="text-2xl font-bold text-slate-800">פרינסיפה ריאל, שוק טיים אאוט ושייט שקיעה</h2>
+            <p class="text-slate-600 text-sm mt-1">גנים ירוקים, גלריות עיצוב בארמון מורי, הפוניקולר המפורסם וחגיגה קולינרית בשוק המוביל בעיר.</p>
+          </div>
+          <span class="text-3xl hidden sm:block">🍷</span>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 gap-4">
+        <!-- Morning Item 1 -->
+        <article data-cat="viewpoint culture" class="activity-card bg-white rounded-2xl p-5 border border-slate-200 shadow-sm hover:shadow-md card-transition flex flex-col md:flex-row gap-4">
+          <div class="md:w-36 flex-shrink-0 flex md:flex-col items-center md:items-start justify-between">
+            <span class="text-xs font-bold text-rose-700 bg-rose-50 px-2.5 py-1 rounded-lg">בוקר | 10:00</span>
+            <label class="inline-flex items-center gap-1.5 cursor-pointer text-xs text-slate-500 mt-1">
+              <input type="checkbox" onchange="toggleVisited(this, 'd4-principe')" class="item-checkbox rounded text-sky-600 w-4 h-4">
+              <span>ביקרתי כאן</span>
+            </label>
+          </div>
+          <div class="flex-1">
+            <div class="flex items-center gap-2 mb-1">
+              <h3 class="text-lg font-bold text-slate-800">תצפית סאו פדרו דה אלקנטרה ושכונת פרינסיפה ריאל</h3>
+              <span class="text-xs bg-rose-100 text-rose-800 px-2 py-0.5 rounded-full">🌿 בוהו ועיצוב</span>
+            </div>
+            <p class="text-slate-600 text-sm leading-relaxed mb-3">
+              התחילו בתצפית הפנורמית המוריקה <strong>Miradouro de São Pedro de Alcântara</strong> הצופה לעבר הטירה. המשיכו לתוך שכונת <strong>Príncipe Real</strong> המקסימה, טיילו בגן עץ הארז הענק ובקרו ב-<strong>Embaixada</strong> – ארמון ניאו-מורי מרהיב שהוסב לקניון בוטיק של מעצבים מקומיים.
+            </p>
+          </div>
+        </article>
+
+        <!-- Midday Item 2 -->
+        <article data-cat="viewpoint" class="activity-card bg-white rounded-2xl p-5 border border-slate-200 shadow-sm hover:shadow-md card-transition flex flex-col md:flex-row gap-4">
+          <div class="md:w-36 flex-shrink-0 flex md:flex-col items-center md:items-start justify-between">
+            <span class="text-xs font-bold text-amber-700 bg-amber-50 px-2.5 py-1 rounded-lg">צהריים | 12:30</span>
+            <label class="inline-flex items-center gap-1.5 cursor-pointer text-xs text-slate-500 mt-1">
+              <input type="checkbox" onchange="toggleVisited(this, 'd4-bica')" class="item-checkbox rounded text-sky-600 w-4 h-4">
+              <span>ביקרתי כאן</span>
+            </label>
+          </div>
+          <div class="flex-1">
+            <div class="flex items-center gap-2 mb-1">
+              <h3 class="text-lg font-bold text-slate-800">הפוניקולר של ביקה (Ascensor da Bica) ותצפית אדמסטור</h3>
+              <span class="text-xs bg-amber-100 text-amber-800 px-2 py-0.5 rounded-full">📸 גלויה ליסבונית</span>
+            </div>
+            <p class="text-slate-600 text-sm leading-relaxed mb-3">
+              רדו במורד הסמטה המפורסמת ביותר לצילומים בליסבון, שבה הקרון הצהוב גולש במדרון תלול כשברקע נוצצים מי הנהר. המשיכו לעצירה מרגיעה ב-<strong>Miradouro de Santa Catarina</strong> לצד כוס קפה או בירה קרה.
+            </p>
+          </div>
+        </article>
+
+        <!-- Afternoon Item 3 -->
+        <article data-cat="food" class="activity-card bg-white rounded-2xl p-5 border border-slate-200 shadow-sm hover:shadow-md card-transition flex flex-col md:flex-row gap-4">
+          <div class="md:w-36 flex-shrink-0 flex md:flex-col items-center md:items-start justify-between">
+            <span class="text-xs font-bold text-rose-700 bg-rose-50 px-2.5 py-1 rounded-lg">אחה"צ | 14:00</span>
+            <label class="inline-flex items-center gap-1.5 cursor-pointer text-xs text-slate-500 mt-1">
+              <input type="checkbox" onchange="toggleVisited(this, 'd4-timeout')" class="item-checkbox rounded text-sky-600 w-4 h-4">
+              <span>ביקרתי כאן</span>
+            </label>
+          </div>
+          <div class="flex-1">
+            <div class="flex items-center gap-2 mb-1">
+              <h3 class="text-lg font-bold text-slate-800">שוק טיים אאוט (Time Out Market / Mercado da Ribeira)</h3>
+              <span class="text-xs bg-rose-100 text-rose-800 px-2 py-0.5 rounded-full">🍴 חגיגת טעמים</span>
+            </div>
+            <p class="text-slate-600 text-sm leading-relaxed mb-3">
+              מתחם קולינרי תוסס עם עשרות דוכנים המופעלים על ידי מיטב השפים של פורטוגל. זה הזמן לטעום: טרטר דגים טרי, קרוקטים מיוחדים, סטייק פורטוגלי בלחמנייה (Prego) וכוס יין ירוק (Vinho Verde).
+            </p>
+          </div>
+        </article>
+
+        <!-- Sunset & Night Item 4 -->
+        <article data-cat="food viewpoint" class="activity-card bg-white rounded-2xl p-5 border border-slate-200 shadow-sm hover:shadow-md card-transition flex flex-col md:flex-row gap-4">
+          <div class="md:w-36 flex-shrink-0 flex md:flex-col items-center md:items-start justify-between">
+            <span class="text-xs font-bold text-indigo-700 bg-indigo-50 px-2.5 py-1 rounded-lg">שקיעה ולילה | 17:30</span>
+            <label class="inline-flex items-center gap-1.5 cursor-pointer text-xs text-slate-500 mt-1">
+              <input type="checkbox" onchange="toggleVisited(this, 'd4-sunset-night')" class="item-checkbox rounded text-sky-600 w-4 h-4">
+              <span>ביקרתי כאן</span>
+            </label>
+          </div>
+          <div class="flex-1">
+            <div class="flex items-center gap-2 mb-1">
+              <h3 class="text-lg font-bold text-slate-800">שיט שקיעה בנהר הטז'ו וסיום ברחוב הוורוד / Bairro Alto</h3>
+              <span class="text-xs bg-indigo-100 text-indigo-800 px-2 py-0.5 rounded-full">⛵ סיום חגיגי</span>
+            </div>
+            <p class="text-slate-600 text-sm leading-relaxed mb-3">
+              סיימו את הטיול בשיט מפרשית של שעה וחצי מול אורות העיר והגשר השוקעים באופק. לאחר מכן, חגגו את הלילה האחרון ברובע באירו אלטו השמח או בדרינק ברחוב הוורוד (Pink Street).
+            </p>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section id="content-tips" class="day-section hidden space-y-6">
+      <div class="bg-amber-50 p-6 rounded-2xl border border-amber-200">
+        <h2 class="text-2xl font-bold text-amber-900 mb-2">💡 טיפים מנצחים לחופשה מושלמת בליסבון</h2>
+        <p class="text-amber-800 text-sm">המלצות פרקטיות שיחסכו לכם כסף, זמן והרבה מאמץ בעליות של העיר.</p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <!-- Tip 1 -->
+        <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm">
+          <div class="text-2xl mb-2">👟</div>
+          <h3 class="font-bold text-slate-800 text-base mb-1">נעלי הליכה הן עניין קריטי</h3>
+          <p class="text-slate-600 text-sm leading-relaxed">
+            ליסבון בנויה על 7 גבעות מרוצפות באבני גיר קטנות וחלקלקות (Calçada Portuguesa). עקבים או סנדלים בעלי סוליה חלקה יגרמו להחלקה. הצטיידו בנעלי סניקרס נוחות עם אחיזה טובה.
+          </p>
+        </div>
+
+        <!-- Tip 2 -->
+        <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm">
+          <div class="text-2xl mb-2">💳</div>
+          <h3 class="font-bold text-slate-800 text-base mb-1">כרטיס Navegante ושיטת Zapping</h3>
+          <p class="text-slate-600 text-sm leading-relaxed">
+            רכשו במכונות המטרו כרטיס נטען ירוק (Navegante) והטעינו אותו בכסף בשיטת <strong>Zapping</strong>. זה מוזיל כל נסיעה במטרו, בחשמלית (כולל חשמלית 28 ומעליות עירוניות) ובמעבורות בכ-40%!
+          </p>
+        </div>
+
+        <!-- Tip 3 -->
+        <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm">
+          <div class="text-2xl mb-2">🚕</div>
+          <h3 class="font-bold text-slate-800 text-base mb-1">אפליקציות נסיעה: Bolt ו-Uber</h3>
+          <p class="text-slate-600 text-sm leading-relaxed">
+            שירותי הנסיעות בפורטוגל זולים להפליא ביחס למערב אירופה (במיוחד אפליקציית Bolt). אם אתם עייפים מהעליות או ממהרים בין בלם למרכז העיר, נסיעה תעלה לעיתים קרובות 4-7 אירו בלבד.
+          </p>
+        </div>
+
+        <!-- Tip 4 -->
+        <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm">
+          <div class="text-2xl mb-2">🎟️</div>
+          <h3 class="font-bold text-slate-800 text-base mb-1">הזמנת כרטיסים מראש חוסכת שעות</h3>
+          <p class="text-slate-600 text-sm leading-relaxed">
+            <strong>ארמון פנה בסינטרה ומנזר ז'רונימוש בבלם</strong> מחייבים הזמנה אונליין מראש. ללא כרטיס עם שעה מוגדרת מראש, תאלצו להמתין בתור ארוך במיוחד או לא להיכנס כלל.
+          </p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="bg-slate-900 text-slate-400 py-8 border-t border-slate-800 mt-12 text-center text-xs">
+    <div class="max-w-6xl mx-auto px-4 flex flex-col sm:flex-row items-center justify-between gap-4">
+      <div class="flex items-center gap-2">
+        <span class="text-amber-400 text-base">🇵🇹</span>
+        <span class="text-slate-200 font-medium">נסיעה טובה לליסבון! Boas Viagens</span>
+      </div>
+      <div>
+        <span>טיול מהנה בין הסמטאות, המאפים והנופים עוצרי הנשימה.</span>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Tab switching logic
+    function switchTab(tabId) {
+      // Update Tab Buttons
+      const tabs = document.querySelectorAll('.day-tab');
+      tabs.forEach(tab => {
+        tab.classList.remove('bg-sky-600', 'text-white', 'shadow-sm');
+        tab.classList.add('bg-white', 'text-slate-700');
+      });
+
+      const activeBtn = document.getElementById('tab-' + tabId);
+      if (activeBtn) {
+        activeBtn.classList.remove('bg-white', 'text-slate-700');
+        activeBtn.classList.add('bg-sky-600', 'text-white', 'shadow-sm');
+      }
+
+      // Hide all sections, show active
+      const sections = document.querySelectorAll('.day-section');
+      sections.forEach(sec => sec.classList.add('hidden'));
+
+      const activeSection = document.getElementById('content-' + tabId);
+      if (activeSection) {
+        activeSection.classList.remove('hidden');
+      }
+
+      // Clear search input on tab switch to avoid confusion
+      const search = document.getElementById('searchInput');
+      if (search) search.value = '';
+      resetFilterVisuals();
+    }
+
+    // Category Filter Logic
+    function filterCategory(category) {
+      // Update pills UI
+      const pills = document.querySelectorAll('.cat-pill');
+      pills.forEach(p => {
+        p.classList.remove('bg-slate-900', 'text-white');
+        p.classList.add('bg-slate-100', 'text-slate-600');
+      });
+      event.target.classList.remove('bg-slate-100', 'text-slate-600');
+      event.target.classList.add('bg-slate-900', 'text-white');
+
+      const cards = document.querySelectorAll('.activity-card');
+      cards.forEach(card => {
+        const cats = card.getAttribute('data-cat') || '';
+        if (category === 'all' || cats.includes(category)) {
+          card.classList.remove('hidden');
+        } else {
+          card.classList.add('hidden');
+        }
+      });
+    }
+
+    function resetFilterVisuals() {
+      const cards = document.querySelectorAll('.activity-card');
+      cards.forEach(c => c.classList.remove('hidden'));
+    }
+
+    // Search Logic
+    function handleSearch() {
+      const query = document.getElementById('searchInput').value.trim().toLowerCase();
+      const currentActiveSection = document.querySelector('.day-section:not(.hidden)');
+      if (!currentActiveSection) return;
+
+      const cards = currentActiveSection.querySelectorAll('.activity-card');
+      cards.forEach(card => {
+        const text = card.innerText.toLowerCase();
+        if (text.includes(query)) {
+          card.classList.remove('hidden');
+        } else {
+          card.classList.add('hidden');
+        }
+      });
+    }
+
+    // Interactive Checklist (with localStorage persistence)
+    function toggleVisited(checkbox, id) {
+      const card = checkbox.closest('.activity-card');
+      if (checkbox.checked) {
+        card.classList.add('opacity-60', 'bg-slate-50');
+        localStorage.setItem('lisbon_' + id, 'true');
+      } else {
+        card.classList.remove('opacity-60', 'bg-slate-50');
+        localStorage.removeItem('lisbon_' + id);
+      }
+    }
+
+    function toggleAllVisited() {
+      const checkboxes = document.querySelectorAll('.item-checkbox');
+      checkboxes.forEach(cb => {
+        cb.checked = false;
+        const card = cb.closest('.activity-card');
+        if (card) card.classList.remove('opacity-60', 'bg-slate-50');
+      });
+      // Clear localStorage items for lisbon
+      Object.keys(localStorage).forEach(key => {
+        if (key.startsWith('lisbon_')) {
+          localStorage.removeItem(key);
+        }
+      });
+    }
+
+    // Initialize saved checkmarks on load
+    window.addEventListener('DOMContentLoaded', () => {
+      const checkboxes = document.querySelectorAll('.item-checkbox');
+      checkboxes.forEach(cb => {
+        const onclickAttr = cb.getAttribute('onchange') || '';
+        const match = onclickAttr.match(/'([^']+)'/);
+        if (match && match[1]) {
+          const id = match[1];
+          if (localStorage.getItem('lisbon_' + id) === 'true') {
+            cb.checked = true;
+            const card = cb.closest('.activity-card');
+            if (card) card.classList.add('opacity-60', 'bg-slate-50');
+          }
+        }
+      });
+    });
+  </script>
+</body>
+</html>
